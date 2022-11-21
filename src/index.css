@@ -3,11 +3,300 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+  color: #222;
+  font-weight: 300;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.app {
+width: 1280px;
+padding: 15px;
+margin: 50px auto;
 }
+
+
+header {
+position: relative;
+}
+
+.header .logo{
+font-weight: 600;
+font-size: 20px;
+border-bottom: 3px solid #222;
+padding: 3px;
+}
+
+.header_wrapper {
+display: flex;
+justify-content: space-evenly;
+align-items: center;
+width: 100%;
+}
+
+header ul.nav {
+float: right;  /*! позиционируется справо */
+list-style: none;
+}
+header ul.nav li {
+display: inline;
+margin: 0 0 0 25px;
+cursor: pointer;
+transition: color .5s, font-weight .2s;
+}
+header ul.nav li:hover {
+color: rgb(0, 82, 204);
+font-weight: 400;
+}
+
+.header .presentation {
+ margin: 50px 0;
+ background: url('./components/img/headerImg.jpg')  no-repeat;
+ width: 100%;
+ height: 500px;
+ background-size: cover;
+ object-fit: container;
+ background-position: center center;
+ /* ! Накладываем доп. текст */
+ background-blend-mode: multiply;
+ background-color: #777;
+ position: relative;
+}
+/* ! Добавляем текст на изображение с помощью after */
+.header .presentation:after {
+content: 'Лучшие товары для вашего дома';
+position: absolute;
+top: 100px;
+left: 50px;
+width: 300px;
+font-size: 40px;
+font-weight: bold;
+color: #eee;
+}
+
+.header .presentation:before {
+content: 'по низким ценам';
+position: absolute;
+top: 270px;
+left: 50px;
+width: 300px;
+font-size: 16px;
+font-weight: 400;
+color: #eee;
+}
+
+footer {
+text-align: center;
+margin: 100px;
+}
+
+
+
+/* ! Стили с товарами */
+
+main {
+display: flex;
+width: 100%;
+flex-wrap: wrap;
+justify-content: space-between;
+}
+main .item {
+width: 30%;
+margin-bottom: 50px;
+background: #f5f5f5; 
+overflow: hidden;  /*! картинка при увеличении не вылезает за рамки блока */
+position: relative;
+padding: 20px;
+}
+
+main .item img {
+width: 100%;
+height: 300px;
+border-radius: 10px 10px;
+transition: transform .5s ease-in-out;
+}
+main .item img:hover {
+transform: scale(1.05);
+}
+
+main.item h2,
+main.item p,
+main.item b {
+margin: 10px 20px;
+color: #333;
+}
+
+main .item b {
+color: #5fa36a;
+}
+
+main .add-to-cart {
+position: absolute;
+right: 20px;
+bottom: 20px;
+background: #ca5252;
+width: 35px;
+height: 35px;
+text-align: center;
+line-height: 33px;
+color: #fff;
+border-radius: 50%;
+cursor: pointer; 
+font-weight: 600;
+transition: transform .5s ease;
+}
+main .add-to-cart:hover {
+transform: scale(1.2) translateY(-5px);
+}
+
+/* Стили корзины */
+
+.shop-cart-button {
+float: right;
+cursor: pointer;
+transition: all .5s ease;
+}
+.shop-cart-button:hover,
+.shop-cart-button.active {
+color: #dc3d3d;
+transform: scale(1.2);
+}
+
+header .shop-cart {
+position: absolute;
+top: 50px;
+right: 0;
+width: 450px;
+background: #fafafa;
+box-shadow: 4px 5px 15px -7px #606060;
+z-index: 1000;
+}
+
+.shop-cart .item {
+width: 100%;
+padding: 15px;
+}
+
+.shop-cart .item img {
+width: 100px;
+float: left;
+margin-right: 20px;
+border-radius: 2px;
+}
+.shop-cart .item h2 {
+font-size: 20px;
+margin-top: 0;
+padding: 0;
+margin-bottom: 10px;
+}
+.shop-cart .item b {
+color: #797979;
+margin: 0;
+padding: 0;
+font-weight: 600;
+}
+
+.empty h2{
+font-size: 20px;
+margin-bottom: 20px;
+padding-left: 15px;
+}
+
+/* Стили для категорий */
+.categories div {
+  display: inline-block;
+  background: #f2f2f2;
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  margin-right: 15px;
+  cursor: pointer;
+  transition: all .3s ease;
+  border: 1px solid transparent;
+}
+
+.categories div:hover {
+  border-color: silver;
+  transform: scale(1.05);
+}
+
+
+
+/* Стили для иконки удаления */
+.item .delete-icon {
+  color: #ca5252;
+  float: right;
+  position: relative;
+  top: -16px;
+  right: 30px;
+  cursor: pointer;
+  transition: all .5s ease;
+}
+.item .delete-icon:hover {
+  color: #ff8b8b;
+  transform: scale(1.5);
+}
+
+
+
+/* ! Стили с описанием товара (всплывающий блок) */
+.full-item {
+  position: fixed;
+  /* Растянут на всю ширину нашей страницы */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.551);
+  z-index: 9999; /* накладывает поверх других окон */
+  overflow: auto; /* для того, чтобы лишние элементы никуда не уходили */
+}
+
+.full-item > div {
+  width: 600px;
+  position: relative;
+  margin: 10% auto;
+  padding: 40px 30px;
+  background: #fff;
+  border-radius: 9px;
+}
+
+
+.full-item img {
+  width: 100%;
+  border-radius: 10px 10px;
+  transition: transform .5s ease-in-out;
+  }
+.full-item img:hover {
+  transform: scale(1.05);
+  }
+  
+.full-item h2,
+.full-item p,
+.full-item b {
+  margin: 10px 20px;
+  color: #333;
+  }
+  
+.full-item b {
+  color: #5fa36a;
+  }
+  
+.full-item .add-to-cart {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  background: #ca5252;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  line-height: 33px;
+  color: #fff;
+  border-radius: 50%;
+  cursor: pointer; 
+  font-weight: 600;
+  transition: transform .5s ease;
+  }
+.full-item .add-to-cart:hover {
+  transform: scale(1.2) translateY(-5px);
+  }
